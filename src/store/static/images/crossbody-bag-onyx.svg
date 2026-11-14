@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1050" viewBox="0 0 900 1050" role="img" aria-label="Trendify Crossbody Bag - Onyx">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e1e5e3"/><stop offset="1" stop-color="#b0babc"/></linearGradient>
+  <linearGradient id="fabric" x1="0" y1="0" x2=".92" y2="1"><stop stop-color="#5d636d"/><stop offset=".56" stop-color="#373b45"/><stop offset="1" stop-color="#23252e"/></linearGradient>
+  <linearGradient id="shine" x1="0" x2="1"><stop stop-color="#fff" stop-opacity=".26"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>
+  <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#fff" stroke-opacity=".11" stroke-width="1"/></pattern>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="22"/></filter>
+</defs>
+<rect width="900" height="1050" fill="url(#bg)"/>
+<rect width="900" height="1050" fill="url(#grid)" opacity=".65"/>
+<path d="M0 0 L460 0 L0 590 Z" fill="#fff" opacity=".06"/>
+<g font-family="Arial,Helvetica,sans-serif" fill="#2e3134">
+  <text x="65" y="78" font-size="24" font-weight="900" letter-spacing="-1">TRENDIFY.</text>
+  <text x="835" y="78" font-size="13" letter-spacing="3" text-anchor="end">THE STREET EDIT</text>
+  <path d="M65 99H835" stroke="#2e3134" opacity=".3"/>
+  <text x="65" y="958" font-size="19" font-weight="700" letter-spacing="3">BAG</text>
+  <text x="65" y="987" font-size="13" letter-spacing="2" opacity=".75">ONYX / FASHION ESSENTIALS</text>
+  <text x="835" y="985" font-size="13" text-anchor="end" opacity=".75">08 / 08</text>
+</g>
+<ellipse cx="450" cy="835" rx="264" ry="32" fill="#000" opacity=".26" filter="url(#shadow)"/>
+<g stroke="#24262c" stroke-linejoin="round" stroke-width="7">
+<path fill="none" stroke="#454851" stroke-width="27" d="M311 590Q250 406 371 274Q476 169 584 258Q667 338 641 492"/>
+<path fill="none" stroke="#999aa1" stroke-width="4" d="M303 584Q257 407 373 282Q475 180 577 263Q654 341 634 487"/>
+<path fill="url(#fabric)" d="M270 476Q275 446 307 446 H588Q628 446 632 480L660 721Q659 762 619 765H277Q237 765 239 725Z"/>
+<path fill="#23262d" d="M271 480H632L639 532H265Z"/>
+<path fill="none" stroke="#797d84" stroke-width="4" d="M286 530H614M295 730H609"/>
+<path fill="#e5e1ce" stroke="none" d="M438 517H460V533H438Z"/>
+<path fill="none" stroke="#b0b3b7" stroke-width="5" d="M246 512L274 515 M634 515L655 512"/>
+</g><text x="450" y="657" text-anchor="middle" font-family="Arial" font-size="25" letter-spacing="6" font-weight="700" fill="#999ba0">T.</text></svg>
