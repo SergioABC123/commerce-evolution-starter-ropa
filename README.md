@@ -2,6 +2,17 @@
 
 A small working e-commerce web application used as the baseline for the **ITESO Software Design — Fall 2026 Final Project**.
 
+## Team 05 — Trendify (Urban Streetwear)
+
+- **Team Repository (Public):** [https://github.com/SergioABC123/commerce-evolution-starter-ropa](https://github.com/SergioABC123/commerce-evolution-starter-ropa)
+- **Store Concept:** Trendify — Urban Streetwear & Apparel Storefront
+- **Team Members (5):**
+  1. De los Reyes Renteria, Paulina
+  2. Hernandez Flores, Daniel Emiliano
+  3. Huerta Vasquez, Andres
+  4. Orozco Miranda, Sergio Lavin
+  5. Renteria Mendez, Emilio Ismael
+
 The system is deliberately modest: it works, it has tests and persistence, and its design is reasonable for its original requirements. Your job is to **understand it before you redesign it**, then evolve it when new requirements are released.
 
 ## What already works

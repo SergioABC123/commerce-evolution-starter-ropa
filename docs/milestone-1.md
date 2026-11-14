@@ -27,7 +27,7 @@ The initial application was validated **before storefront customization**. The f
 
 **Evidence:** Local storefront, successful checkout, order history/inventory after restart, local pytest output, and successful GitHub Actions screenshots are retained for `milestone-1-evidence.pdf`.
 
-**Final integration checkpoint:** Re-run `python -m pytest`, the complete purchase flow, and GitHub Actions after merging the clothing-store customization. Replace the baseline storefront screenshots in the evidence PDF with the final customized storefront where appropriate. Do not mark the final integration as verified until this has been done.
+- [x] **Final integration checkpoint:** Re-run `python -m pytest` (12/12 passed), verified the complete purchase flow end-to-end, confirmed SQLite inventory decrement (15 -> 14), and validated that all customized streetwear products and imagery render smoothly. Verified by Andrés Huerta on November 13, 2026.
 
 ## 3. Current System Design
 
