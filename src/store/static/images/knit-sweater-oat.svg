@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1050" viewBox="0 0 900 1050" role="img" aria-label="Trendify Knit Sweater - Oat">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eee2d4"/><stop offset="1" stop-color="#d6c4b0"/></linearGradient>
+  <linearGradient id="fabric" x1="0" y1="0" x2=".92" y2="1"><stop stop-color="#d9bf9e"/><stop offset=".56" stop-color="#b99b7c"/><stop offset="1" stop-color="#8d6f58"/></linearGradient>
+  <linearGradient id="shine" x1="0" x2="1"><stop stop-color="#fff" stop-opacity=".26"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>
+  <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#fff" stroke-opacity=".11" stroke-width="1"/></pattern>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="22"/></filter>
+</defs>
+<rect width="900" height="1050" fill="url(#bg)"/>
+<rect width="900" height="1050" fill="url(#grid)" opacity=".65"/>
+<path d="M0 0 L460 0 L0 590 Z" fill="#fff" opacity=".06"/>
+<g font-family="Arial,Helvetica,sans-serif" fill="#322d26">
+  <text x="65" y="78" font-size="24" font-weight="900" letter-spacing="-1">TRENDIFY.</text>
+  <text x="835" y="78" font-size="13" letter-spacing="3" text-anchor="end">THE STREET EDIT</text>
+  <path d="M65 99H835" stroke="#322d26" opacity=".3"/>
+  <text x="65" y="958" font-size="19" font-weight="700" letter-spacing="3">KNIT</text>
+  <text x="65" y="987" font-size="13" letter-spacing="2" opacity=".75">OAT / FASHION ESSENTIALS</text>
+  <text x="835" y="985" font-size="13" text-anchor="end" opacity=".75">06 / 08</text>
+</g>
+<ellipse cx="450" cy="835" rx="264" ry="32" fill="#000" opacity=".26" filter="url(#shadow)"/>
+<g stroke="#785f4c" stroke-width="5" stroke-linejoin="round">
+<path fill="url(#fabric)" d="M347 310 L395 275 Q452 305 505 275L555 310 L676 411 L621 548 L564 520 L552 820 L345 820 L336 521 L280 547 L225 409Z"/>
+<path fill="#ab9077" d="M392 271Q450 336 508 271L487 308Q453 337 411 308Z"/>
+<path fill="none" stroke="#d7bea2" stroke-width="3" opacity=".6" d="M356 410H544 M353 443H546M350 476H549M348 509H550M345 542H555M347 576H553M348 611H552M347 645H551M347 679H552M346 715H552M345 749H552 M343 781H553"/>
+<path fill="#9a806a" d="M338 789H562V832H338Z M270 529L290 541L273 568L252 559Z M612 539L631 530L649 557L624 569Z"/>
+<path fill="none" stroke="#ead5bd" stroke-width="3" d="M356 798H546M359 811H542"/>
+</g></svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1050" viewBox="0 0 900 1050" role="img" aria-label="Trendify Pleated Skirt - Noir">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e1e2e2"/><stop offset="1" stop-color="#b8babe"/></linearGradient>
+  <linearGradient id="fabric" x1="0" y1="0" x2=".92" y2="1"><stop stop-color="#454249"/><stop offset=".56" stop-color="#2d2d34"/><stop offset="1" stop-color="#17181d"/></linearGradient>
+  <linearGradient id="shine" x1="0" x2="1"><stop stop-color="#fff" stop-opacity=".26"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>
+  <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#fff" stroke-opacity=".11" stroke-width="1"/></pattern>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="22"/></filter>
+</defs>
+<rect width="900" height="1050" fill="url(#bg)"/>
+<rect width="900" height="1050" fill="url(#grid)" opacity=".65"/>
+<path d="M0 0 L460 0 L0 590 Z" fill="#fff" opacity=".06"/>
+<g font-family="Arial,Helvetica,sans-serif" fill="#29292e">
+  <text x="65" y="78" font-size="24" font-weight="900" letter-spacing="-1">TRENDIFY.</text>
+  <text x="835" y="78" font-size="13" letter-spacing="3" text-anchor="end">THE STREET EDIT</text>
+  <path d="M65 99H835" stroke="#29292e" opacity=".3"/>
+  <text x="65" y="958" font-size="19" font-weight="700" letter-spacing="3">SKIRT</text>
+  <text x="65" y="987" font-size="13" letter-spacing="2" opacity=".75">NOIR / FASHION ESSENTIALS</text>
+  <text x="835" y="985" font-size="13" text-anchor="end" opacity=".75">07 / 08</text>
+</g>
+<ellipse cx="450" cy="835" rx="264" ry="32" fill="#000" opacity=".26" filter="url(#shadow)"/>
+<g stroke="#252327" stroke-width="5" stroke-linejoin="round">
+<path fill="url(#fabric)" d="M362 272Q449 257 536 272L569 433L707 799Q451 851 196 799L332 433Z"/>
+<path fill="#202027" d="M351 259H547V315H351Z"/>
+<path fill="none" stroke="#6d6872" stroke-width="4" d="M348 321L257 800M375 324L331 821M407 323L407 834M450 321V839M491 321L495 834M525 319L568 818M550 316L641 801"/>
+<path fill="none" stroke="#aaa4ad" stroke-opacity=".5" stroke-width="3" d="M285 788Q452 820 615 787"/>
+</g></svg>
