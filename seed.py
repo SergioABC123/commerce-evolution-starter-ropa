@@ -13,14 +13,14 @@ from store.models import Product
 
 # (sku, name, description, price_cents, stock_quantity, image_url)
 PRODUCTS = [
-    ('TRND-001', 'Oversized Tee - Bone', 'Heavyweight cotton t-shirt with a relaxed silhouette, dropped shoulders, and a soft bone finish.', 39900, 12, '/static/images/oversized-tee-bone.svg'),
-    ('TRND-002', 'Essential Hoodie - Graphite', 'Everyday fleece hoodie featuring a roomy fit, adjustable drawstrings, and a front kangaroo pocket.', 89900, 8, '/static/images/essential-hoodie-graphite.svg'),
-    ('TRND-003', 'Cargo Pants - Asphalt', 'Relaxed utility trousers with functional side pockets and an adjustable streetwear fit.', 79900, 10, '/static/images/cargo-pants-asphalt.svg'),
-    ('TRND-004', 'Denim Jacket - Indigo', 'Classic indigo denim jacket with structured seams, metal-look buttons, and a versatile boxy cut.', 99900, 7, '/static/images/denim-jacket-indigo.svg'),
-    ('TRND-005', 'Cropped Puffer - Stone', 'Lightweight quilted puffer jacket with a cropped silhouette, high collar, and warm insulation.', 129900, 6, '/static/images/cropped-puffer-stone.svg'),
-    ('TRND-006', 'Knit Sweater - Oat', 'Soft textured crewneck sweater in a neutral oat tone, designed for effortless layering.', 69900, 11, '/static/images/knit-sweater-oat.svg'),
-    ('TRND-007', 'Pleated Skirt - Noir', 'High-waisted black pleated skirt with a fluid shape and a clean minimalist finish.', 59900, 9, '/static/images/pleated-skirt-noir.svg'),
-    ('TRND-008', 'Crossbody Bag - Onyx', 'Compact crossbody bag with a secure zip closure, adjustable strap, and everyday storage.', 44900, 15, '/static/images/crossbody-bag-onyx.svg'),
+    ('TRND-001', 'Oversized Tee - Bone', 'Heavyweight cotton t-shirt with a relaxed silhouette, dropped shoulders, and a soft bone finish.', 39900, 12, '/static/images/oversized-tee-bone.jpg'),
+    ('TRND-002', 'Essential Hoodie - Graphite', 'Everyday fleece hoodie featuring a roomy fit, adjustable drawstrings, and a front kangaroo pocket.', 89900, 8, '/static/images/essential-hoodie-graphite.jpg'),
+    ('TRND-003', 'Cargo Pants - Asphalt', 'Relaxed utility trousers with functional side pockets and an adjustable streetwear fit.', 79900, 10, '/static/images/cargo-pants-asphalt.jpg'),
+    ('TRND-004', 'Denim Jacket - Indigo', 'Classic indigo denim jacket with structured seams, metal-look buttons, and a versatile boxy cut.', 99900, 7, '/static/images/denim-jacket-indigo.jpg'),
+    ('TRND-005', 'Cropped Puffer - Stone', 'Lightweight quilted puffer jacket with a cropped silhouette, high collar, and warm insulation.', 129900, 6, '/static/images/cropped-puffer-stone.jpg'),
+    ('TRND-006', 'Knit Sweater - Oat', 'Soft textured crewneck sweater in a neutral oat tone, designed for effortless layering.', 69900, 11, '/static/images/knit-sweater-oat.jpg'),
+    ('TRND-007', 'Pleated Skirt - Noir', 'High-waisted black pleated skirt with a fluid shape and a clean minimalist finish.', 59900, 9, '/static/images/pleated-skirt-noir.jpg'),
+    ('TRND-008', 'Crossbody Bag - Onyx', 'Compact crossbody bag with a secure zip closure, adjustable strap, and everyday storage.', 44900, 15, '/static/images/crossbody-bag-onyx.jpg'),
 ]
 
 
