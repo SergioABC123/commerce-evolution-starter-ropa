@@ -62,7 +62,16 @@ We choose a data-driven fulfillment policy rather than adding a separate Strateg
 
 Existing 12 tests are retained unchanged. Additional tests cover rule lookup, address validation, all three purchases with exact charged and persisted totals, inventory and items after reopening the database, invalid methods, failed payments, rendered options, and upgrading a legacy database twice without data loss. Manual browser checks are required for live total updates and the hidden address field when pickup is selected.
 
-Run `python -m pytest` locally and verify the GitHub Actions workflow after the PR and merge. Capture the three checkout choices, completed orders, restart persistence, test output and PR/CI results. Full Flask integration tests and GitHub Actions results must be recorded from actual runs; this document does not claim they have passed yet.
+### Final observed verification
+
+- **Local tests:** `python -m pytest` completed with **30 passed in 2.82 s** on the team’s updated `main` checkout.
+- **Continuous integration:** GitHub Actions shows the successful `tests #35` run after PR #7 was merged into `main`.
+- **Workflow:** PRs **#4–#8** (fulfillment policy, persistence/migration, checkout, UI, and integration tests/documentation) were merged. The merged-PR page shows successful checks.
+- **Browser validation:** Standard Shipping ($99) requires a nonempty address; leaving it empty triggered the browser’s required-field warning. Express Shipping shows the $199 fee. Store Pickup allowed an empty address, showed $0 shipping, and successfully created order **#6** (Cargo Pants — Asphalt, subtotal and total $799).
+- **Persistence after restart:** after restarting the Flask application, order #6 remained visible in the history with **Store Pickup**, and its details still showed a $0 shipping fee and a $799 total. Older orders remained visible as Standard Shipping.
+- **Validation distinction:** the browser-level warning was observed manually; server-side rejection is covered by automated tests. The pickup address field may remain visible but is not required.
+
+Screenshots are collected in `milestone-2-evidence.pdf`. These results describe the team’s observed final version, not planned outcomes.
 
 ## Meaningful AI use
 
