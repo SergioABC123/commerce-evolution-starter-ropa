@@ -29,6 +29,9 @@ def init_app(app: Flask) -> None:
         expire_on_commit=False,
     )
     Base.metadata.create_all(engine)
+    from .migrations import migrate_fulfillment
+
+    migrate_fulfillment(engine)
     app.teardown_appcontext(close_session)
 
 

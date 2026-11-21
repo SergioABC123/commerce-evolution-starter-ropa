@@ -2,10 +2,11 @@ from __future__ import annotations
 
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy import DateTime, ForeignKey, Integer, String, Text, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .db import Base
+from .fulfillment import STANDARD
 
 
 class Product(Base):
@@ -28,6 +29,9 @@ class Order(Base):
     customer_name: Mapped[str] = mapped_column(String(120))
     customer_email: Mapped[str] = mapped_column(String(160))
     shipping_address: Mapped[str] = mapped_column(Text)
+    fulfillment_method: Mapped[str] = mapped_column(
+        String(30), default=STANDARD, server_default=text("'standard'")
+    )
     subtotal_cents: Mapped[int] = mapped_column(Integer)
     shipping_cents: Mapped[int] = mapped_column(Integer)
     total_cents: Mapped[int] = mapped_column(Integer)
