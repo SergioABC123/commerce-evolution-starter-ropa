@@ -3,12 +3,12 @@ from __future__ import annotations
 from flask import Blueprint, flash, redirect, render_template, request, session, url_for
 
 from ..db import get_session
+from ..fulfillment import OPTIONS, STANDARD, get_option, validate_address
 from ..models import Order, OrderItem
 from ..payments import FakePaymentProcessor, PaymentDeclined
 from .cart import get_cart_lines
 
 bp = Blueprint("checkout", __name__, url_prefix="/checkout")
-STANDARD_SHIPPING_CENTS = 9_900
 
 
 @bp.get("")
@@ -19,12 +19,18 @@ def checkout_form():
         flash("Your cart is empty.", "error")
         return redirect(url_for("cart.view_cart"))
     subtotal = sum(line.line_total_cents for line in lines)
+    try:
+        selected = get_option(request.args.get("fulfillment_method", STANDARD))
+    except ValueError:
+        selected = get_option(STANDARD)
     return render_template(
         "checkout.html",
         lines=lines,
         subtotal_cents=subtotal,
-        shipping_cents=STANDARD_SHIPPING_CENTS,
-        total_cents=subtotal + STANDARD_SHIPPING_CENTS,
+        options=OPTIONS,
+        selected=selected,
+        shipping_cents=selected.cost_cents,
+        total_cents=subtotal + selected.cost_cents,
     )
 
 
@@ -41,9 +47,22 @@ def place_order():
     shipping_address = request.form.get("shipping_address", "").strip()
     payment_token = request.form.get("payment_token", "").strip()
 
-    if not all([customer_name, customer_email, shipping_address, payment_token]):
-        flash("Please complete all checkout fields.", "error")
+    # Missing field preserves the M1 checkout contract; explicit invalid values fail.
+    try:
+        option = get_option(request.form.get("fulfillment_method", STANDARD))
+    except ValueError as error:
+        flash(str(error), "error")
         return redirect(url_for("checkout.checkout_form"))
+
+    retry_url = url_for("checkout.checkout_form", fulfillment_method=option.code)
+    if not all([customer_name, customer_email, payment_token]):
+        flash("Please complete all checkout fields.", "error")
+        return redirect(retry_url)
+    try:
+        shipping_address = validate_address(option, shipping_address)
+    except ValueError as error:
+        flash(str(error), "error")
+        return redirect(retry_url)
 
     for line in lines:
         if line.quantity > line.product.stock_quantity:
@@ -51,20 +70,21 @@ def place_order():
             return redirect(url_for("cart.view_cart"))
 
     subtotal = sum(line.line_total_cents for line in lines)
-    total = subtotal + STANDARD_SHIPPING_CENTS
+    total = subtotal + option.cost_cents
 
     try:
         payment_reference = FakePaymentProcessor().charge(total, payment_token)
     except PaymentDeclined:
         flash("Payment was declined. Try a different test token.", "error")
-        return redirect(url_for("checkout.checkout_form"))
+        return redirect(retry_url)
 
     order = Order(
         customer_name=customer_name,
         customer_email=customer_email,
         shipping_address=shipping_address,
         subtotal_cents=subtotal,
-        shipping_cents=STANDARD_SHIPPING_CENTS,
+        fulfillment_method=option.code,
+        shipping_cents=option.cost_cents,
         total_cents=total,
         payment_reference=payment_reference,
         status="confirmed",
