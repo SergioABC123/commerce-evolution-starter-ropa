@@ -6,7 +6,14 @@
 <form method="post" class="form-card">
   <label>Name<input required name="customer_name" autocomplete="name"></label>
   <label>Email<input required type="email" name="customer_email" autocomplete="email"></label>
-  <label>Shipping address<textarea required name="shipping_address" rows="4"></textarea></label>
+  <label>Fulfillment option
+    <select required name="fulfillment_method" id="fulfillment-method">
+      {% for option in options %}
+      <option value="{{ option.code }}" data-cost="{{ option.cost_cents }}" data-requires-address="{{ 'true' if option.requires_address else 'false' }}" data-label="{{ option.label }}"{% if option.code == selected.code %} selected{% endif %}>{{ option.label }} — {{ option.cost_cents|money }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label id="shipping-address-label">Shipping address<textarea name="shipping_address" rows="4" autocomplete="street-address"></textarea><small>Required for shipping; not needed for store pickup.</small></label>
   <label>Test payment token<input required name="payment_token" value="tok_success"><small>Use <code>tok_fail</code> to simulate a declined payment.</small></label>
   <button>Place order</button>
 </form>
@@ -14,8 +21,32 @@
   <h3>Order summary</h3>
   {% for line in lines %}<div class="summary-line"><span>{{ line.quantity }} × {{ line.product.name }}</span><span>{{ line.line_total_cents|money }}</span></div>{% endfor %}
   <hr><div class="summary-line"><span>Subtotal</span><span>{{ subtotal_cents|money }}</span></div>
-  <div class="summary-line"><span>Standard shipping</span><span>{{ shipping_cents|money }}</span></div>
-  <div class="summary-line total"><span>Total</span><span>{{ total_cents|money }}</span></div>
+  <div class="summary-line"><span id="fulfillment-label">{{ selected.label }}</span><span id="fulfillment-cost">{{ shipping_cents|money }}</span></div>
+  <div class="summary-line total"><span>Total</span><span id="checkout-total" data-subtotal="{{ subtotal_cents }}">{{ total_cents|money }}</span></div>
+  <noscript><p class="muted">The final total is recalculated on the server using the selected option.</p></noscript>
 </aside>
 </div>
+<script>
+  // Presentation only: the server validates the option and recalculates all costs.
+  const fulfillment = document.getElementById('fulfillment-method');
+  const addressLabel = document.getElementById('shipping-address-label');
+  const address = addressLabel.querySelector('textarea');
+  const total = document.getElementById('checkout-total');
+  const money = cents => '$' + (cents / 100).toLocaleString('en-US', {
+    minimumFractionDigits: 2, maximumFractionDigits: 2
+  });
+  function updateFulfillment() {
+    const choice = fulfillment.selectedOptions[0];
+    const requiresAddress = choice.dataset.requiresAddress === 'true';
+    const cost = Number(choice.dataset.cost);
+    addressLabel.hidden = !requiresAddress;
+    address.required = requiresAddress;
+    address.disabled = !requiresAddress;
+    document.getElementById('fulfillment-label').textContent = choice.dataset.label;
+    document.getElementById('fulfillment-cost').textContent = money(cost);
+    total.textContent = money(Number(total.dataset.subtotal) + cost);
+  }
+  fulfillment.addEventListener('change', updateFulfillment);
+  updateFulfillment();
+</script>
 {% endblock %}
