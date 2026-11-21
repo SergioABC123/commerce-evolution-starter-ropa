@@ -7,6 +7,8 @@ src/commerce_evolution_starter.egg-info/requires.txt
 src/commerce_evolution_starter.egg-info/top_level.txt
 src/store/__init__.py
 src/store/db.py
+src/store/fulfillment.py
+src/store/migrations.py
 src/store/models.py
 src/store/payments.py
 src/store/routes/cart.py
@@ -38,3 +40,5 @@ src/store/templates/product.html
 tests/test_cart.py
 tests/test_catalog.py
 tests/test_checkout.py
+tests/test_fulfillment.py
+tests/test_fulfillment_migration.py

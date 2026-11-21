@@ -4,6 +4,7 @@ from sqlalchemy.orm import selectinload
 
 from ..db import get_session
 from ..models import Order
+from ..fulfillment import option_label
 
 bp = Blueprint("orders", __name__, url_prefix="/orders")
 
@@ -12,7 +13,7 @@ bp = Blueprint("orders", __name__, url_prefix="/orders")
 def order_history():
     db = get_session()
     orders = db.scalars(select(Order).order_by(Order.created_at.desc())).all()
-    return render_template("orders.html", orders=orders)
+    return render_template("orders.html", orders=orders, option_label=option_label)
 
 
 @bp.get("/<int:order_id>")
@@ -25,4 +26,4 @@ def order_detail(order_id: int):
     )
     if order is None:
         abort(404)
-    return render_template("order_confirmation.html", order=order)
+    return render_template("order_confirmation.html", order=order, fulfillment_label=option_label(order.fulfillment_method))
