@@ -1,0 +1,6 @@
+{
+  "external_order_id": "m3-test-market-1001",
+  "buyer": {"name": "Test Buyer", "email": "buyer@example.com"},
+  "shipping": {"fulfillment_method": "standard", "address": "123 Sample Street"},
+  "items": [{"sku": "TRND-001", "quantity": 2}]
+}
