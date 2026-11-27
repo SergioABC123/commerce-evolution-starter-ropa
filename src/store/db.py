@@ -29,9 +29,10 @@ def init_app(app: Flask) -> None:
         expire_on_commit=False,
     )
     Base.metadata.create_all(engine)
-    from .migrations import migrate_fulfillment
+    from .migrations import migrate_fulfillment, migrate_marketplace
 
     migrate_fulfillment(engine)
+    migrate_marketplace(engine)
     app.teardown_appcontext(close_session)
 
 
