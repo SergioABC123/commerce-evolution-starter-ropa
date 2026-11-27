@@ -14,3 +14,23 @@ def migrate_fulfillment(engine: Engine) -> None:
                 "ALTER TABLE orders ADD COLUMN fulfillment_method "
                 "VARCHAR(30) NOT NULL DEFAULT 'standard'"
             )
+
+
+def migrate_marketplace(engine: Engine) -> None:
+    """Add marketplace provenance and unique external IDs without losing M2 data."""
+    with engine.begin() as connection:
+        connection.exec_driver_sql("BEGIN IMMEDIATE")
+        columns = {column["name"] for column in inspect(connection).get_columns("orders")}
+        if "order_source" not in columns:
+            connection.exec_driver_sql(
+                "ALTER TABLE orders ADD COLUMN order_source "
+                "VARCHAR(30) NOT NULL DEFAULT 'storefront'"
+            )
+        if "marketplace_order_id" not in columns:
+            connection.exec_driver_sql(
+                "ALTER TABLE orders ADD COLUMN marketplace_order_id VARCHAR(120)"
+            )
+        connection.exec_driver_sql(
+            "CREATE UNIQUE INDEX IF NOT EXISTS ux_orders_marketplace_order_id "
+            "ON orders (marketplace_order_id)"
+        )

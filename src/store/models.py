@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, ForeignKey, Integer, String, Text, text
+from sqlalchemy import DateTime, ForeignKey, Index, Integer, String, Text, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .db import Base
@@ -24,11 +24,18 @@ class Product(Base):
 
 class Order(Base):
     __tablename__ = "orders"
+    __table_args__ = (
+        Index("ux_orders_marketplace_order_id", "marketplace_order_id", unique=True),
+    )
 
     id: Mapped[int] = mapped_column(primary_key=True)
     customer_name: Mapped[str] = mapped_column(String(120))
     customer_email: Mapped[str] = mapped_column(String(160))
     shipping_address: Mapped[str] = mapped_column(Text)
+    order_source: Mapped[str] = mapped_column(
+        String(30), default="storefront", server_default=text("'storefront'")
+    )
+    marketplace_order_id: Mapped[str | None] = mapped_column(String(120), nullable=True)
     fulfillment_method: Mapped[str] = mapped_column(
         String(30), default=STANDARD, server_default=text("'standard'")
     )
