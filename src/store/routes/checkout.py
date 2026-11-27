@@ -4,7 +4,7 @@ from flask import Blueprint, flash, redirect, render_template, request, session,
 
 from ..db import get_session
 from ..fulfillment import OPTIONS, STANDARD, get_option, validate_address
-from ..models import Order, OrderItem
+from ..ordering import OrderRequest, OrderingError, RequestedItem, place_order as create_order
 from ..payments import FakePaymentProcessor, PaymentDeclined
 from .cart import get_cart_lines
 
@@ -64,47 +64,27 @@ def place_order():
         flash(str(error), "error")
         return redirect(retry_url)
 
-    for line in lines:
-        if line.quantity > line.product.stock_quantity:
-            flash(f"Not enough stock for {line.product.name}.", "error")
-            return redirect(url_for("cart.view_cart"))
-
-    subtotal = sum(line.line_total_cents for line in lines)
-    total = subtotal + option.cost_cents
-
+    # Shared business workflow: only the web adapter authorizes a new charge.
+    # The marketplace adapter passes a reference for an already-paid order.
     try:
-        payment_reference = FakePaymentProcessor().charge(total, payment_token)
+        result = create_order(
+            db,
+            OrderRequest(
+                customer_name=customer_name,
+                customer_email=customer_email,
+                shipping_address=shipping_address,
+                fulfillment_method=option.code,
+                items=tuple(RequestedItem(line.product.sku, line.quantity) for line in lines),
+            ),
+            lambda amount_cents: FakePaymentProcessor().charge(amount_cents, payment_token),
+        )
+    except OrderingError as error:
+        flash(str(error), "error")
+        return redirect(url_for("cart.view_cart") if "Not enough stock" in str(error) else retry_url)
     except PaymentDeclined:
         flash("Payment was declined. Try a different test token.", "error")
         return redirect(retry_url)
 
-    order = Order(
-        customer_name=customer_name,
-        customer_email=customer_email,
-        shipping_address=shipping_address,
-        subtotal_cents=subtotal,
-        fulfillment_method=option.code,
-        shipping_cents=option.cost_cents,
-        total_cents=total,
-        payment_reference=payment_reference,
-        status="confirmed",
-    )
-    db.add(order)
-    db.flush()
-
-    for line in lines:
-        order.items.append(
-            OrderItem(
-                product_id=line.product.id,
-                sku=line.product.sku,
-                product_name=line.product.name,
-                unit_price_cents=line.product.price_cents,
-                quantity=line.quantity,
-            )
-        )
-        line.product.stock_quantity -= line.quantity
-
-    db.commit()
     session["cart"] = {}
     flash("Order placed successfully.", "success")
-    return redirect(url_for("orders.order_detail", order_id=order.id))
+    return redirect(url_for("orders.order_detail", order_id=result.order.id))
